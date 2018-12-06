@@ -16,6 +16,11 @@ public class NCC_Movie_Project2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        if (Utils.Funcs.testConn() != "") {
+            formLichChieu formLichChieu1 = new formLichChieu();
+            formLichChieu1.setVisible(true);
+        }
+
     }
     
 }
