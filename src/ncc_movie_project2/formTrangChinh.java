@@ -5,6 +5,8 @@
  */
 package ncc_movie_project2;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Dao Viet Anh
@@ -35,8 +37,14 @@ public class formTrangChinh extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbTenNguoiDung = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
+        btnPhim = new javax.swing.JButton();
+        btnPhong = new javax.swing.JButton();
+        btnLichChieu = new javax.swing.JButton();
+        btnThongKe = new javax.swing.JButton();
+        btnDatVe = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Trang quản trị NCC");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,6 +59,71 @@ public class formTrangChinh extends javax.swing.JFrame {
 
         btnDangXuat.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
+
+        btnPhim.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnPhim.setForeground(new java.awt.Color(255, 51, 51));
+        btnPhim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ncc_movie_project2/res/img/sec_movie.png"))); // NOI18N
+        btnPhim.setText("Phim");
+        btnPhim.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPhim.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPhim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhimActionPerformed(evt);
+            }
+        });
+
+        btnPhong.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnPhong.setForeground(new java.awt.Color(0, 51, 255));
+        btnPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ncc_movie_project2/res/img/sec_room.png"))); // NOI18N
+        btnPhong.setText("Phòng");
+        btnPhong.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPhong.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhongActionPerformed(evt);
+            }
+        });
+
+        btnLichChieu.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnLichChieu.setForeground(new java.awt.Color(0, 204, 51));
+        btnLichChieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ncc_movie_project2/res/img/sec_schedule.png"))); // NOI18N
+        btnLichChieu.setText("Lịch chiếu");
+        btnLichChieu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLichChieu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLichChieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLichChieuActionPerformed(evt);
+            }
+        });
+
+        btnThongKe.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnThongKe.setForeground(new java.awt.Color(153, 0, 153));
+        btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ncc_movie_project2/res/img/sec_stats.png"))); // NOI18N
+        btnThongKe.setText("Thống kê");
+        btnThongKe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnThongKe.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
+
+        btnDatVe.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnDatVe.setForeground(new java.awt.Color(255, 153, 51));
+        btnDatVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ncc_movie_project2/res/img/sec_ticket.png"))); // NOI18N
+        btnDatVe.setText("Đặt vé");
+        btnDatVe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDatVe.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDatVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatVeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,15 +137,37 @@ public class formTrangChinh extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDangXuat)
                 .addGap(155, 155, 155))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPhim, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnDatVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(btnLichChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTenNguoiDung)
                     .addComponent(btnDangXuat))
-                .addGap(0, 377, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLichChieu)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnPhim)
+                        .addComponent(btnPhong)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDatVe)
+                    .addComponent(btnThongKe))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,6 +184,53 @@ public class formTrangChinh extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhimActionPerformed
+        // TODO add your handling code here:
+        showForm("phim");
+    }//GEN-LAST:event_btnPhimActionPerformed
+
+    private void btnPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongActionPerformed
+        // TODO add your handling code here:
+        showForm("phong");
+    }//GEN-LAST:event_btnPhongActionPerformed
+
+    private void btnLichChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichChieuActionPerformed
+        // TODO add your handling code here:
+        showForm("lichChieu");
+    }//GEN-LAST:event_btnLichChieuActionPerformed
+
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        // TODO add your handling code here:
+        showForm("thongKe");
+    }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void btnDatVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatVeActionPerformed
+        // TODO add your handling code here:
+        showForm("datVe");
+    }//GEN-LAST:event_btnDatVeActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        formDangNhap f  = new formDangNhap();
+        f.setVisible(true);
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    void showForm(String label){
+        JFrame f = null;
+        
+        switch(label){
+            case "phim" : f = new formPhim(); break;
+            case "phong" : f = new formPhong(); break;
+            case "lichChieu" : f = new formLichChieu();break;
+            case "datVe" : f = new formDatVe();break;
+            case "thongKe" : f = new formThongKe(); break;
+        }
+        if (f != null) {
+f.setVisible(true);            
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -126,6 +268,11 @@ public class formTrangChinh extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnDatVe;
+    private javax.swing.JButton btnLichChieu;
+    private javax.swing.JButton btnPhim;
+    private javax.swing.JButton btnPhong;
+    private javax.swing.JButton btnThongKe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbTenNguoiDung;
