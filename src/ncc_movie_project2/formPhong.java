@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,12 +34,15 @@ public class formPhong extends javax.swing.JFrame {
     PreparedStatement preparedStatement = null;
 
     public formPhong() {
+        
         initComponents();
 
         tableModel = (DefaultTableModel) tblPhong.getModel();
 
         loadData();
         showData();
+        
+        tab_all.remove(tabUpdate);
     }
 
     private void loadData() {
@@ -97,7 +102,7 @@ public class formPhong extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tab_all = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_maPhongChieu = new javax.swing.JTextField();
@@ -119,8 +124,8 @@ public class formPhong extends javax.swing.JFrame {
         btn_Edit = new javax.swing.JButton();
         btn_Delete = new javax.swing.JButton();
         btn_Refresh = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        tabUpdate = new javax.swing.JPanel();
+        tab_update = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txt_maPhongChieu1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -134,6 +139,7 @@ public class formPhong extends javax.swing.JFrame {
         txt_dienTich1 = new javax.swing.JTextField();
         txt_chuThich1 = new javax.swing.JTextField();
         btn_Save = new javax.swing.JButton();
+        btn_CancelUpdate = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -162,6 +168,7 @@ public class formPhong extends javax.swing.JFrame {
 
         jLabel7.setText("Chú Thích : ");
 
+        btn_Create.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_Create.setForeground(new java.awt.Color(0, 153, 0));
         btn_Create.setText("Tạo");
         btn_Create.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +177,8 @@ public class formPhong extends javax.swing.JFrame {
             }
         });
 
-        btn_Cancel.setForeground(new java.awt.Color(0, 153, 0));
+        btn_Cancel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_Cancel.setForeground(new java.awt.Color(255, 0, 51));
         btn_Cancel.setText("Hủy");
         btn_Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,10 +214,10 @@ public class formPhong extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_Create)
-                .addGap(64, 64, 64)
-                .addComponent(btn_Cancel)
-                .addGap(72, 72, 72))
+                .addComponent(btn_Create, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(btn_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,14 +246,14 @@ public class formPhong extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_chuThich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Create)
                     .addComponent(btn_Cancel))
-                .addGap(20, 20, 20))
+                .addGap(30, 30, 30))
         );
 
-        jTabbedPane1.addTab("Tạo Phòng Chiếu", jPanel2);
+        tab_all.addTab("Tạo Phòng Chiếu", jPanel2);
 
         tblPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -277,6 +285,7 @@ public class formPhong extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPhong);
 
+        btn_Edit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_Edit.setForeground(new java.awt.Color(255, 0, 0));
         btn_Edit.setText("Sửa");
         btn_Edit.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +294,7 @@ public class formPhong extends javax.swing.JFrame {
             }
         });
 
+        btn_Delete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_Delete.setForeground(new java.awt.Color(255, 0, 0));
         btn_Delete.setText("Xóa");
         btn_Delete.addActionListener(new java.awt.event.ActionListener() {
@@ -293,6 +303,7 @@ public class formPhong extends javax.swing.JFrame {
             }
         });
 
+        btn_Refresh.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         btn_Refresh.setForeground(new java.awt.Color(0, 153, 204));
         btn_Refresh.setText("Làm mới");
         btn_Refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -314,16 +325,16 @@ public class formPhong extends javax.swing.JFrame {
                 .addComponent(btn_Refresh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Edit)
-                .addGap(51, 51, 51)
+                .addGap(39, 39, 39)
                 .addComponent(btn_Delete)
-                .addGap(83, 83, 83))
+                .addGap(37, 37, 37))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Edit)
                     .addComponent(btn_Delete)
@@ -331,7 +342,7 @@ public class formPhong extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        jTabbedPane1.addTab("Danh Sách Phòng Chiếu", jPanel4);
+        tab_all.addTab("Danh Sách Phòng Chiếu", jPanel4);
 
         jLabel8.setText("Mã Phòng Chiếu : ");
 
@@ -345,6 +356,8 @@ public class formPhong extends javax.swing.JFrame {
 
         jLabel13.setText("Chú Thích : ");
 
+        btn_Save.setBackground(new java.awt.Color(204, 255, 204));
+        btn_Save.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_Save.setForeground(new java.awt.Color(51, 0, 255));
         btn_Save.setText("Lưu");
         btn_Save.addActionListener(new java.awt.event.ActionListener() {
@@ -353,91 +366,104 @@ public class formPhong extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        btn_CancelUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_CancelUpdate.setForeground(new java.awt.Color(0, 51, 51));
+        btn_CancelUpdate.setText("Hủy");
+        btn_CancelUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelUpdateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout tab_updateLayout = new javax.swing.GroupLayout(tab_update);
+        tab_update.setLayout(tab_updateLayout);
+        tab_updateLayout.setHorizontalGroup(
+            tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tab_updateLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(tab_updateLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(txt_maPhongChieu1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tab_updateLayout.createSequentialGroup()
+                        .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel13)
                             .addComponent(jLabel10)
                             .addComponent(jLabel12)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_soGhe1)
                             .addComponent(txt_mayChieu1)
                             .addComponent(txt_amThanh1)
                             .addComponent(txt_dienTich1)
                             .addComponent(txt_chuThich1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))
                 .addGap(41, 41, 41))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab_updateLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Save)
-                .addGap(140, 140, 140))
+                .addGap(31, 31, 31)
+                .addComponent(btn_CancelUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        tab_updateLayout.setVerticalGroup(
+            tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tab_updateLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txt_maPhongChieu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txt_soGhe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txt_mayChieu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txt_amThanh1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_dienTich1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_chuThich1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btn_Save)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Save)
+                    .addComponent(btn_CancelUpdate))
+                .addGap(23, 23, 23))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout tabUpdateLayout = new javax.swing.GroupLayout(tabUpdate);
+        tabUpdate.setLayout(tabUpdateLayout);
+        tabUpdateLayout.setHorizontalGroup(
+            tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 454, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tabUpdateLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tab_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
+        tabUpdateLayout.setVerticalGroup(
+            tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 329, Short.MAX_VALUE)
+            .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tabUpdateLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tab_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Sửa Thông Tin Phòng", jPanel3);
+        tab_all.addTab("Sửa Thông Tin Phòng", tabUpdate);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 153));
@@ -449,25 +475,25 @@ public class formPhong extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tab_all, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tab_all)
                 .addContainerGap())
         );
 
@@ -484,7 +510,7 @@ public class formPhong extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_CancelActionPerformed
 
     private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
-        // TODO add your handling code here:
+        // TODO, add your handling code here:
         String maPhongChieu = txt_maPhongChieu.getText().toString();
         String soGhe = txt_soGhe.getText().toString();
         String mayChieu = txt_mayChieu.getText().toString();
@@ -492,33 +518,57 @@ public class formPhong extends javax.swing.JFrame {
         String dienTich = txt_dienTich.getText().toString();
         String chuThich = txt_chuThich.getText().toString();
 
-        Phong phong = new Phong(maPhongChieu, mayChieu, soGhe, amThanh, dienTich, chuThich);
+        Phong phong = new Phong(maPhongChieu, soGhe, mayChieu, amThanh, dienTich, chuThich);
         danhSachPhong.add(phong);
 
         tableModel.addRow(new String[]{maPhongChieu, soGhe, mayChieu, amThanh, dienTich, chuThich});
         insertIntoDatabase(phong);
+        
+        if(eu <= 0) {
+            JOptionPane optionPane = new JOptionPane("Tạo phòng chiếu thất bại",JOptionPane.ERROR_MESSAGE);
+            JDialog dialog = optionPane.createDialog("FAIL!");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+        }
+        else {
+            JOptionPane optionPane = new JOptionPane("Tạo phòng chiếu thành công",JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = optionPane.createDialog("SUCCESS!");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+        }
     }//GEN-LAST:event_btn_CreateActionPerformed
 
     private void btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = tblPhong.getSelectedRow();
-        String id = (tableModel.getValueAt(selectedRowIndex, 0).toString());
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
-            String sql = "delete from phongchieu where maPhongChieu= '" + id+"'";
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                preparedStatement.close();
-                conn.close();
+        
+         int selectedRowIndex = tblPhong.getSelectedRow();
+         String id = (tableModel.getValueAt(selectedRowIndex, 0).toString());
+         int ret = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa phòng chiếu này?", "Confirm", JOptionPane.YES_NO_OPTION);
+         if(ret != JOptionPane.YES_OPTION) {
+             return;
+   }
+         try {
+             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+             String sql = "delete from phongchieu where maPhongChieu= '" + id+"'";
+             preparedStatement = conn.prepareStatement(sql);
+             preparedStatement.execute();
+             ret = preparedStatement.executeUpdate();
+             if (ret != -1) {
+                 JOptionPane.showMessageDialog(this, "Phòng chiếu này đã được xóa");  
+             }
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         } finally {
+             try {
+                 preparedStatement.close();
+                 conn.close();
+ 
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+         }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+           
     }//GEN-LAST:event_btn_DeleteActionPerformed
 
     private void tblPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongMouseClicked
@@ -528,7 +578,7 @@ public class formPhong extends javax.swing.JFrame {
     }//GEN-LAST:event_tblPhongMouseClicked
 
     private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
-        // TODO add your handling code here:
+        
         loadData();
         showData();
     }//GEN-LAST:event_btn_RefreshActionPerformed
@@ -569,10 +619,20 @@ public class formPhong extends javax.swing.JFrame {
         updatedphong.chuThich = txt_chuThich1.getText().toString();
         Save(old_id, updatedphong);
         
+        JOptionPane optionPane = new JOptionPane("Sửa phòng chiếu thành công!",JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog("SUCCESS!");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+        
+         tab_all.remove(tabUpdate);
+        
     }//GEN-LAST:event_btn_SaveActionPerformed
     String old_id;
     private void btn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditActionPerformed
         // TODO add your handling code here:
+        tabUpdate.setName("Sửa thông tin phòng");
+        tab_all.add(tabUpdate);
+        
         int selectedRowIndex = tblPhong.getSelectedRow();
         old_id = tableModel.getValueAt(selectedRowIndex,0).toString();  
         txt_maPhongChieu1.setText(tableModel.getValueAt(selectedRowIndex,0).toString());
@@ -583,9 +643,16 @@ public class formPhong extends javax.swing.JFrame {
         txt_chuThich1.setText(tableModel.getValueAt(selectedRowIndex,5).toString());
     }//GEN-LAST:event_btn_EditActionPerformed
 
+    private void btn_CancelUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelUpdateActionPerformed
+        // TODO add your handling code here:
+         tab_all.remove(tabUpdate);
+    }//GEN-LAST:event_btn_CancelUpdateActionPerformed
+
+    int eu; 
     private void insertIntoDatabase(Phong phong) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
+       
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
             String sql = "insert into phongchieu(maPhongChieu, soGhe, mayChieu,amThanh,dienTich,chuThich) values (?,?,?,?,?,?)";
@@ -597,7 +664,8 @@ public class formPhong extends javax.swing.JFrame {
             preparedStatement.setString(5, phong.dienTich);
             preparedStatement.setString(6, phong.chuThich);
 
-            preparedStatement.execute();
+//            preparedStatement.execute();
+            eu = preparedStatement.executeUpdate(); 
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -648,6 +716,7 @@ public class formPhong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Cancel;
+    private javax.swing.JButton btn_CancelUpdate;
     private javax.swing.JButton btn_Create;
     private javax.swing.JButton btn_Delete;
     private javax.swing.JButton btn_Edit;
@@ -668,11 +737,11 @@ public class formPhong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel tabUpdate;
+    private javax.swing.JTabbedPane tab_all;
+    private javax.swing.JPanel tab_update;
     private javax.swing.JTable tblPhong;
     private javax.swing.JTextField txt_amThanh;
     private javax.swing.JTextField txt_amThanh1;

@@ -5,17 +5,41 @@
  */
 package ncc_movie_project2;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Dao Viet Anh
  */
 public class formPhim extends javax.swing.JFrame {
 
-    /**
-     * Creates new form formPhim
-     */
+    List<Phim> danhSachPhim = new ArrayList<>();
+
+    DefaultTableModel tableModel;
+
+    Connection conn = null;
+    PreparedStatement ps = null;
+    
     public formPhim() {
         initComponents();
+        tableModel = (DefaultTableModel) tblPhim.getModel();
+        
+        loadData();
+        showData();
+        
+        tab_allFilm.remove(tab_UpdateFilm);
     }
 
     /**
@@ -27,22 +51,552 @@ public class formPhim extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        tab_allFilm = new javax.swing.JTabbedPane();
+        TaoPhimMoi = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btn_CreateFilm = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        btn_CancelFilm = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_phimID = new javax.swing.JTextField();
+        txt_thoiLuongPhut = new javax.swing.JTextField();
+        txt_tenPhim = new javax.swing.JTextField();
+        txt_namCongChieu = new javax.swing.JTextField();
+        txt_quocGia = new javax.swing.JTextField();
+        cb_tinhTrang1 = new javax.swing.JComboBox<>();
+        DanhSachPhim = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPhim = new javax.swing.JTable();
+        btn_RefreshFilm = new javax.swing.JButton();
+        btn_UpdateFilm = new javax.swing.JButton();
+        btn_DeleteFilm = new javax.swing.JButton();
+        tab_UpdateFilm = new javax.swing.JPanel();
+        Panel_UpdateFilm = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btn_SaveFilm = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        btn_CancelUpdateFilm = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txt_phimID1 = new javax.swing.JTextField();
+        txt_thoiLuongPhut1 = new javax.swing.JTextField();
+        txt_tenPhim1 = new javax.swing.JTextField();
+        txt_namCongChieu1 = new javax.swing.JTextField();
+        txt_quocGia1 = new javax.swing.JTextField();
+        cb_tinhTrang2 = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lí phim");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setText("Quản Lý Phim");
+
+        jLabel3.setText("Tên Phim :");
+
+        btn_CreateFilm.setBackground(new java.awt.Color(255, 153, 153));
+        btn_CreateFilm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_CreateFilm.setText("Tạo Phim");
+        btn_CreateFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreateFilmActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Thời Lượng (Phút) :");
+
+        btn_CancelFilm.setBackground(new java.awt.Color(255, 204, 51));
+        btn_CancelFilm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_CancelFilm.setText("Hủy");
+        btn_CancelFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelFilmActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Năm Công Chiếu :");
+
+        jLabel6.setText("Quốc Gia :");
+
+        jLabel7.setText("Tình Trạng :");
+
+        jLabel2.setText("ID Phim :");
+
+        cb_tinhTrang1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã Chiếu (1)", "Đang Chiếu (2)", "Chưa Chiếu (3)" }));
+
+        javax.swing.GroupLayout TaoPhimMoiLayout = new javax.swing.GroupLayout(TaoPhimMoi);
+        TaoPhimMoi.setLayout(TaoPhimMoiLayout);
+        TaoPhimMoiLayout.setHorizontalGroup(
+            TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TaoPhimMoiLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TaoPhimMoiLayout.createSequentialGroup()
+                        .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_tenPhim, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addComponent(txt_phimID))
+                        .addGap(22, 22, 22))
+                    .addGroup(TaoPhimMoiLayout.createSequentialGroup()
+                        .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(25, 25, 25)
+                        .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_namCongChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_thoiLuongPhut, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_quocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_tinhTrang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(22, Short.MAX_VALUE))))
+            .addGroup(TaoPhimMoiLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_CreateFilm)
+                .addGap(30, 30, 30)
+                .addComponent(btn_CancelFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+        );
+        TaoPhimMoiLayout.setVerticalGroup(
+            TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TaoPhimMoiLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_phimID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_tenPhim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_thoiLuongPhut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_namCongChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_quocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cb_tinhTrang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(TaoPhimMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_CreateFilm)
+                    .addComponent(btn_CancelFilm))
+                .addGap(28, 28, 28))
+        );
+
+        tab_allFilm.addTab("Tạo Phim Mới", TaoPhimMoi);
+
+        tblPhim.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Phim", "Tên Phim", "Thời Lượng", "Năm Chiếu", "Quốc Gia", "Tình Trạng"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblPhim);
+
+        btn_RefreshFilm.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btn_RefreshFilm.setForeground(new java.awt.Color(0, 51, 255));
+        btn_RefreshFilm.setText("Làm Mới");
+        btn_RefreshFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RefreshFilmActionPerformed(evt);
+            }
+        });
+
+        btn_UpdateFilm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_UpdateFilm.setForeground(new java.awt.Color(255, 0, 204));
+        btn_UpdateFilm.setText("Sửa");
+        btn_UpdateFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UpdateFilmActionPerformed(evt);
+            }
+        });
+
+        btn_DeleteFilm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_DeleteFilm.setForeground(new java.awt.Color(0, 153, 51));
+        btn_DeleteFilm.setText("Xóa");
+        btn_DeleteFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeleteFilmActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout DanhSachPhimLayout = new javax.swing.GroupLayout(DanhSachPhim);
+        DanhSachPhim.setLayout(DanhSachPhimLayout);
+        DanhSachPhimLayout.setHorizontalGroup(
+            DanhSachPhimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DanhSachPhimLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(DanhSachPhimLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(btn_RefreshFilm)
+                .addGap(111, 111, 111)
+                .addComponent(btn_UpdateFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_DeleteFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+        DanhSachPhimLayout.setVerticalGroup(
+            DanhSachPhimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DanhSachPhimLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(DanhSachPhimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_RefreshFilm)
+                    .addComponent(btn_UpdateFilm)
+                    .addComponent(btn_DeleteFilm))
+                .addContainerGap())
+        );
+
+        tab_allFilm.addTab("Danh Sách Phim", DanhSachPhim);
+
+        jLabel8.setText("Tên Phim :");
+
+        btn_SaveFilm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_SaveFilm.setForeground(new java.awt.Color(0, 102, 102));
+        btn_SaveFilm.setText("Lưu");
+        btn_SaveFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SaveFilmActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Thời Lượng (Phút) :");
+
+        btn_CancelUpdateFilm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_CancelUpdateFilm.setForeground(new java.awt.Color(255, 0, 0));
+        btn_CancelUpdateFilm.setText("Hủy");
+        btn_CancelUpdateFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelUpdateFilmActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Năm Công Chiếu :");
+
+        jLabel11.setText("Quốc Gia :");
+
+        jLabel12.setText("Tình Trạng :");
+
+        jLabel13.setText("ID Phim :");
+
+        cb_tinhTrang2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã Chiếu (1)", "Đang Chiếu (2)", "Chưa Chiếu (3)" }));
+
+        javax.swing.GroupLayout Panel_UpdateFilmLayout = new javax.swing.GroupLayout(Panel_UpdateFilm);
+        Panel_UpdateFilm.setLayout(Panel_UpdateFilmLayout);
+        Panel_UpdateFilmLayout.setHorizontalGroup(
+            Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                        .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_tenPhim1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addComponent(txt_phimID1))
+                        .addGap(22, 22, 22))
+                    .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                        .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel10)))
+                        .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(txt_thoiLuongPhut1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_UpdateFilmLayout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cb_tinhTrang2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txt_namCongChieu1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                                                .addComponent(txt_quocGia1)))))
+                                .addContainerGap(22, Short.MAX_VALUE))
+                            .addGroup(Panel_UpdateFilmLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_SaveFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(btn_CancelUpdateFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45))))))
+        );
+        Panel_UpdateFilmLayout.setVerticalGroup(
+            Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_UpdateFilmLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txt_phimID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_tenPhim1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txt_thoiLuongPhut1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txt_namCongChieu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txt_quocGia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(cb_tinhTrang2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(Panel_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_SaveFilm)
+                    .addComponent(btn_CancelUpdateFilm))
+                .addGap(28, 28, 28))
+        );
+
+        javax.swing.GroupLayout tab_UpdateFilmLayout = new javax.swing.GroupLayout(tab_UpdateFilm);
+        tab_UpdateFilm.setLayout(tab_UpdateFilmLayout);
+        tab_UpdateFilmLayout.setHorizontalGroup(
+            tab_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+            .addGroup(tab_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tab_UpdateFilmLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Panel_UpdateFilm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        tab_UpdateFilmLayout.setVerticalGroup(
+            tab_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 334, Short.MAX_VALUE)
+            .addGroup(tab_UpdateFilmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tab_UpdateFilmLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Panel_UpdateFilm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        tab_allFilm.addTab("Chỉnh Sửa Phim", tab_UpdateFilm);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tab_allFilm)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(147, 147, 147))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tab_allFilm)
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_CancelFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelFilmActionPerformed
+        txt_phimID.setText("");
+        txt_tenPhim.setText("");
+        txt_thoiLuongPhut.setText("");
+        txt_namCongChieu.setText("");
+        txt_quocGia.setText("");
+//        txt_tinhTrang.setText("");
+    }//GEN-LAST:event_btn_CancelFilmActionPerformed
+    int eu;
+    private void btn_CreateFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateFilmActionPerformed
+        // TODO add your handling code here:
+        String phimID = txt_phimID.getText().toString();
+        String tenPhim = txt_tenPhim.getText().toString();
+        String thoiLuongPhut = txt_thoiLuongPhut.getText().toString();
+        String namCongChieu = txt_namCongChieu.getText().toString();
+        String quocGia = txt_quocGia.getText().toString();
+        String tinhTrangStr = cb_tinhTrang1.getSelectedItem().toString();
+        String tinhTrang = tinhTrangStr.substring(tinhTrangStr.lastIndexOf("(")+1,tinhTrangStr.lastIndexOf(")"));
+        
+        
+        Phim phim = new Phim(phimID, tenPhim, thoiLuongPhut, namCongChieu, quocGia, tinhTrang);
+        danhSachPhim.add(phim);
+        tableModel.addRow(new String[]{phimID, tenPhim, thoiLuongPhut, namCongChieu, quocGia, tinhTrang});
+        
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+            String sql = "insert into phim(phimID, tenPhim, thoiLuongPhut,namCongChieu,quocGia,tinhTrang) values (?,?,?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, phim.phimID);
+            ps.setString(2, phim.tenPhim);
+            ps.setString(3, phim.thoiLuongPhut);
+            ps.setString(4, phim.namCongChieu);
+            ps.setString(5, phim.quocGia);
+            ps.setString(6, phim.tinhTrang);
+            eu = ps.executeUpdate(); 
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e);
+        }
+        finally {
+            try {
+                ps.close();
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(formPhim.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if(eu <= 0) {
+            JOptionPane optionPane = new JOptionPane("Tạo phim mới thất bại",JOptionPane.ERROR_MESSAGE);
+            JDialog dialog = optionPane.createDialog("FAIL!");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+        }
+        else {
+            JOptionPane optionPane = new JOptionPane("Tạo phim mới thành công",JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = optionPane.createDialog("SUCCESS!");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_CreateFilmActionPerformed
+
+    private void btn_RefreshFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshFilmActionPerformed
+        // Button Làm mới dữ liệu khi thực hiện Tạo / Sửa / Xóa Phim:
+        loadData();
+        showData();
+    }//GEN-LAST:event_btn_RefreshFilmActionPerformed
+    int old_id;
+    private void btn_UpdateFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateFilmActionPerformed
+        // Button Sửa Phim :
+        Panel_UpdateFilm.setName("Sửa thông tin phim");
+        tab_allFilm.add(Panel_UpdateFilm);
+        
+        int selectedRowIndex = tblPhim.getSelectedRow();
+        old_id = Integer.parseInt(tableModel.getValueAt(selectedRowIndex,0).toString());  
+        txt_phimID1.setText(tableModel.getValueAt(selectedRowIndex,0).toString());
+        txt_tenPhim1.setText(tableModel.getValueAt(selectedRowIndex,1).toString());
+        txt_thoiLuongPhut1.setText(tableModel.getValueAt(selectedRowIndex,2).toString());
+        txt_namCongChieu1.setText(tableModel.getValueAt(selectedRowIndex,3).toString());
+        txt_quocGia1.setText(tableModel.getValueAt(selectedRowIndex,4).toString());
+        String tinhTrangStr = cb_tinhTrang2.getSelectedItem().toString();
+        String tinhTrang = tinhTrangStr.substring(tinhTrangStr.lastIndexOf("(")+1,tinhTrangStr.lastIndexOf(")"));
+       // txt_tinhTrang1.setText(tableModel.getValueAt(selectedRowIndex,5).toString());
+       
+    }//GEN-LAST:event_btn_UpdateFilmActionPerformed
+
+    private void btn_DeleteFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteFilmActionPerformed
+        // Button Xóa Phim:
+        int selectedRowIndex = tblPhim.getSelectedRow();
+         String id = (tableModel.getValueAt(selectedRowIndex, 0).toString());
+         int ret = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa phim này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+         if(ret != JOptionPane.YES_OPTION) {
+             return;
+   }
+         try {
+             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+             String sql = "delete from phim where phimID= '" + id+"'";
+             ps = conn.prepareStatement(sql);
+             ps.execute();
+             ret = ps.executeUpdate();
+             if (ret != -1) {
+                 JOptionPane.showMessageDialog(this, "Phòng chiếu này đã được xóa");  
+             }
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         } finally {
+             try {
+                 ps.close();
+                 conn.close();
+ 
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+         }
+        loadData();
+        showData();
+    }//GEN-LAST:event_btn_DeleteFilmActionPerformed
+
+    private void btn_CancelUpdateFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelUpdateFilmActionPerformed
+        // Hủy hành động Sửa Phim
+        tab_allFilm.remove(Panel_UpdateFilm);
+    }//GEN-LAST:event_btn_CancelUpdateFilmActionPerformed
+
+    private void btn_SaveFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveFilmActionPerformed
+        // Lưu lại dữ liệu Phim sau khi sửa phim:
+        Phim updatedPhim = new Phim();
+        updatedPhim.phimID = txt_phimID1.getText().toString();
+        updatedPhim.tenPhim = txt_tenPhim1.getText().toString();
+        updatedPhim.thoiLuongPhut = txt_thoiLuongPhut1.getText().toString();
+        updatedPhim.namCongChieu = txt_namCongChieu1.getText().toString();
+        updatedPhim.quocGia = txt_quocGia1.getText().toString();
+        String tinhTrangStr = cb_tinhTrang2.getSelectedItem().toString();
+        String tinhTrang = tinhTrangStr.substring(tinhTrangStr.lastIndexOf("(")+1,tinhTrangStr.lastIndexOf(")"));
+        SaveFilm(old_id, updatedPhim);
+        
+        // String tinhTrangStr = cb_tinhTrang1.getSelectedItem().toString();
+        //String tinhTrang = tinhTrangStr.substring(tinhTrangStr.lastIndexOf("(")+1,tinhTrangStr.lastIndexOf(")"));
+
+        JOptionPane optionPane = new JOptionPane("Sửa phim thành công!",JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog("SUCCESS!");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+
+        tab_allFilm.remove(Panel_UpdateFilm);
+        loadData();
+        showData();
+
+if(        cb_tinhTrang1.getSelectedItem().toString().contains("Đã")){}        
+    }//GEN-LAST:event_btn_SaveFilmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +634,120 @@ public class formPhim extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel DanhSachPhim;
+    private javax.swing.JPanel Panel_UpdateFilm;
+    private javax.swing.JPanel TaoPhimMoi;
+    private javax.swing.JButton btn_CancelFilm;
+    private javax.swing.JButton btn_CancelUpdateFilm;
+    private javax.swing.JButton btn_CreateFilm;
+    private javax.swing.JButton btn_DeleteFilm;
+    private javax.swing.JButton btn_RefreshFilm;
+    private javax.swing.JButton btn_SaveFilm;
+    private javax.swing.JButton btn_UpdateFilm;
+    private javax.swing.JComboBox<String> cb_tinhTrang1;
+    private javax.swing.JComboBox<String> cb_tinhTrang2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel tab_UpdateFilm;
+    private javax.swing.JTabbedPane tab_allFilm;
+    private javax.swing.JTable tblPhim;
+    private javax.swing.JTextField txt_namCongChieu;
+    private javax.swing.JTextField txt_namCongChieu1;
+    private javax.swing.JTextField txt_phimID;
+    private javax.swing.JTextField txt_phimID1;
+    private javax.swing.JTextField txt_quocGia;
+    private javax.swing.JTextField txt_quocGia1;
+    private javax.swing.JTextField txt_tenPhim;
+    private javax.swing.JTextField txt_tenPhim1;
+    private javax.swing.JTextField txt_thoiLuongPhut;
+    private javax.swing.JTextField txt_thoiLuongPhut1;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+            String sql = "select * from phim";
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            danhSachPhim.clear();
+            while (rs.next()) {
+                Phim phim = new Phim(rs.getString("phimID"),
+                        rs.getString("tenPhim"),
+                        rs.getString("thoiLuongPhut"),
+                        rs.getString("namCongChieu"),
+                        rs.getString("quocGia"),
+                        rs.getString("tinhTrang"));
+                danhSachPhim.add(phim);
+
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(formPhong.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(formPhong.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    private void showData() {
+        tableModel.setRowCount(0);
+        for (int i = 0; i < danhSachPhim.size(); i++) {
+            tableModel.addRow(new String[]{danhSachPhim.get(i).phimID,
+                danhSachPhim.get(i).tenPhim,
+                danhSachPhim.get(i).thoiLuongPhut,
+                danhSachPhim.get(i).namCongChieu,
+                danhSachPhim.get(i).quocGia,
+                danhSachPhim.get(i).tinhTrang});
+        }
+    }
+
+    private void SaveFilm(int old_id, Phim updatedPhim) {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+            String sql = "update phim set phimID= '"+updatedPhim.phimID+"',"
+                                         + " tenPhim= '"+updatedPhim.tenPhim+"', "
+                                         + " thoiLuongPhut= '"+updatedPhim.thoiLuongPhut+"',"
+                                         + " namCongChieu='"+updatedPhim.namCongChieu+"', "
+                                         + " quocGia='"+updatedPhim.quocGia+"',"
+                                         + " tinhTrang="+updatedPhim.tinhTrang+" where phimID= '"+old_id+"'";                                         
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                conn.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

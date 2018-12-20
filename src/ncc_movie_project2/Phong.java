@@ -22,8 +22,8 @@ public class Phong {
 
     public Phong(String maPhongChieu, String soGhe, String mayChieu, String amThanh, String dienTich, String chuThich) {
         this.maPhongChieu = maPhongChieu;
-        this.mayChieu = mayChieu;
         this.soGhe = soGhe;
+        this.mayChieu = mayChieu;
         this.amThanh = amThanh;
         this.dienTich = dienTich;
         this.chuThich = chuThich;
