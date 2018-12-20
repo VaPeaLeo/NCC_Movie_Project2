@@ -7,6 +7,9 @@ package ncc_movie_project2;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -156,21 +159,35 @@ public class formDangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenDangNhapActionPerformed
 
     private void btnDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseClicked
-        // TODO add your handling code here:
-       onBtnDangNhapClicked();
+        try {
+            // TODO add your handling code here:
+            onBtnDangNhapClicked();
+        } catch (SQLException ex) {
+            Logger.getLogger(formDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDangNhapMouseClicked
 
     private void txtTenDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenDangNhapKeyPressed
         // TODO add your handling code here:
         
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { onBtnDangNhapClicked();}
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { try {
+            onBtnDangNhapClicked();
+            } catch (SQLException ex) {
+                Logger.getLogger(formDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
     }//GEN-LAST:event_txtTenDangNhapKeyPressed
 
     private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
         // TODO add your handling code here:
-          if (evt.getKeyCode() == KeyEvent.VK_ENTER) { onBtnDangNhapClicked(); }
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) { try {
+              onBtnDangNhapClicked();
+              } catch (SQLException ex) {
+                  Logger.getLogger(formDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+              }
+}
     }//GEN-LAST:event_txtMatKhauKeyPressed
-private void onBtnDangNhapClicked(){
+private void onBtnDangNhapClicked() throws SQLException{
      // TODO add your handling code here:
         String tenDangNhap = txtTenDangNhap.getText();
         String matKhau = txtMatKhau.getText();
