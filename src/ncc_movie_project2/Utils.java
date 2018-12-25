@@ -314,6 +314,73 @@ public class Utils {
             }
 
         }
+        
+        static boolean xoaLichChieu(ArrayList<Integer> idList ) throws SQLException {
+            boolean result = false;
+            String url = getConnString();
+            Connection conn = null;
+            try {
+                conn = DriverManager.getConnection(url, "root", "");
+
+                String idListStr = "(";
+                    for (int id : idList) {
+                        idListStr += "'" + id + "',";
+                    }
+                    idListStr += ")";
+                    idListStr = idListStr.replace(",)", ")");
+                    System.out.println("id List  =" + idListStr);
+                String sql
+                        = "delete from lichChieu where id in "+ idListStr;
+//                System.out.println(sql);
+                Statement stmnt = conn.createStatement();
+                int rows = stmnt.executeUpdate(sql);
+
+//    System.out.println(rs.toString());
+//                System.out.println("before check");
+                if(rows>0) result = true;
+            } catch (SQLException ex) {
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+//                System.out.println("stop");
+                return result;
+            }
+
+        }
+        
+        static boolean updateLichChieu(int id, int phimID, String phong, Long gioChieu ) throws SQLException {
+            boolean result = false;
+            String url = getConnString();
+            Connection conn = null;
+            try {
+                conn = DriverManager.getConnection(url, "root", "");
+
+                String sql
+                        = "update lichChieu"
+                        + " set movieID = "+phimID
+                        + ", room = '"+phong+"'"
+                        + ", gioBatDauChieu= "+gioChieu
+                        + " where id = "+id;
+                System.out.println(sql);
+                Statement stmnt = conn.createStatement();
+                int rows = stmnt.executeUpdate(sql);
+
+//    System.out.println(rs.toString());
+//                System.out.println("before check");
+                if(rows>0) result = true;
+            } catch (SQLException ex) {
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+//                System.out.println("stop");
+                return result;
+            }
+
+        }
 
         static String datePickerToVNeseString(LocalDate date) {
 
