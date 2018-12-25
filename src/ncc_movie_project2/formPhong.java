@@ -34,14 +34,14 @@ public class formPhong extends javax.swing.JFrame {
     PreparedStatement preparedStatement = null;
 
     public formPhong() {
-        
+
         initComponents();
 
         tableModel = (DefaultTableModel) tblPhong.getModel();
 
         loadData();
         showData();
-        
+
         tab_all.remove(tabUpdate);
     }
 
@@ -123,7 +123,6 @@ public class formPhong extends javax.swing.JFrame {
         tblPhong = new javax.swing.JTable();
         btn_Edit = new javax.swing.JButton();
         btn_Delete = new javax.swing.JButton();
-        btn_Refresh = new javax.swing.JButton();
         tabUpdate = new javax.swing.JPanel();
         tab_update = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -169,7 +168,7 @@ public class formPhong extends javax.swing.JFrame {
         jLabel7.setText("Chú Thích : ");
 
         btn_Create.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_Create.setForeground(new java.awt.Color(0, 153, 0));
+        btn_Create.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/plus.png"))); // NOI18N
         btn_Create.setText("Tạo");
         btn_Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +177,7 @@ public class formPhong extends javax.swing.JFrame {
         });
 
         btn_Cancel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_Cancel.setForeground(new java.awt.Color(255, 0, 51));
+        btn_Cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cancel.png"))); // NOI18N
         btn_Cancel.setText("Hủy");
         btn_Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,10 +213,10 @@ public class formPhong extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_Create, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(btn_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addComponent(btn_Create)
+                .addGap(30, 30, 30)
+                .addComponent(btn_Cancel)
+                .addGap(50, 50, 50))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +245,7 @@ public class formPhong extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_chuThich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Create)
                     .addComponent(btn_Cancel))
@@ -286,7 +285,7 @@ public class formPhong extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPhong);
 
         btn_Edit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_Edit.setForeground(new java.awt.Color(255, 0, 0));
+        btn_Edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pencil-edit-button.png"))); // NOI18N
         btn_Edit.setText("Sửa");
         btn_Edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,20 +294,11 @@ public class formPhong extends javax.swing.JFrame {
         });
 
         btn_Delete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_Delete.setForeground(new java.awt.Color(255, 0, 0));
+        btn_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
         btn_Delete.setText("Xóa");
         btn_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DeleteActionPerformed(evt);
-            }
-        });
-
-        btn_Refresh.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-        btn_Refresh.setForeground(new java.awt.Color(0, 153, 204));
-        btn_Refresh.setText("Làm mới");
-        btn_Refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_RefreshActionPerformed(evt);
             }
         });
 
@@ -321,9 +311,7 @@ public class formPhong extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(btn_Refresh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(22, 232, Short.MAX_VALUE)
                 .addComponent(btn_Edit)
                 .addGap(39, 39, 39)
                 .addComponent(btn_Delete)
@@ -333,12 +321,11 @@ public class formPhong extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Edit)
-                    .addComponent(btn_Delete)
-                    .addComponent(btn_Refresh))
+                    .addComponent(btn_Delete))
                 .addGap(23, 23, 23))
         );
 
@@ -358,7 +345,7 @@ public class formPhong extends javax.swing.JFrame {
 
         btn_Save.setBackground(new java.awt.Color(204, 255, 204));
         btn_Save.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_Save.setForeground(new java.awt.Color(51, 0, 255));
+        btn_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/download-button (1).png"))); // NOI18N
         btn_Save.setText("Lưu");
         btn_Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,7 +354,7 @@ public class formPhong extends javax.swing.JFrame {
         });
 
         btn_CancelUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_CancelUpdate.setForeground(new java.awt.Color(0, 51, 51));
+        btn_CancelUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cancel.png"))); // NOI18N
         btn_CancelUpdate.setText("Hủy");
         btn_CancelUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -405,8 +392,8 @@ public class formPhong extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Save)
                 .addGap(31, 31, 31)
-                .addComponent(btn_CancelUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addComponent(btn_CancelUpdate)
+                .addGap(63, 63, 63))
         );
         tab_updateLayout.setVerticalGroup(
             tab_updateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,7 +442,7 @@ public class formPhong extends javax.swing.JFrame {
         );
         tabUpdateLayout.setVerticalGroup(
             tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
+            .addGap(0, 305, Short.MAX_VALUE)
             .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(tabUpdateLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -475,14 +462,15 @@ public class formPhong extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tab_all, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tab_all, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,10 +479,10 @@ public class formPhong extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tab_all)
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -508,7 +496,7 @@ public class formPhong extends javax.swing.JFrame {
         txt_soGhe.setText("");
         txt_chuThich.setText("");
     }//GEN-LAST:event_btn_CancelActionPerformed
-
+    int eu;
     private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
         // TODO, add your handling code here:
         String maPhongChieu = txt_maPhongChieu.getText().toString();
@@ -523,78 +511,64 @@ public class formPhong extends javax.swing.JFrame {
 
         tableModel.addRow(new String[]{maPhongChieu, soGhe, mayChieu, amThanh, dienTich, chuThich});
         insertIntoDatabase(phong);
-        
-        if(eu <= 0) {
-            JOptionPane optionPane = new JOptionPane("Tạo phòng chiếu thất bại",JOptionPane.ERROR_MESSAGE);
-            JDialog dialog = optionPane.createDialog("FAIL!");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
+
+        if (eu >= 0) {
+            JOptionPane.showMessageDialog(this, "Tạo phòng chiếu thành công", "SUCCESS ", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Tạo phòng chiếu thất bại", "FAIL ", JOptionPane.ERROR_MESSAGE);
+
         }
-        else {
-            JOptionPane optionPane = new JOptionPane("Tạo phòng chiếu thành công",JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog = optionPane.createDialog("SUCCESS!");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
-        }
+
+        loadData();
+        showData();
     }//GEN-LAST:event_btn_CreateActionPerformed
+
+    private void insertIntoDatabase(Phong phong) {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+            String sql = "insert into phongchieu(maPhongChieu, soGhe, mayChieu,amThanh,dienTich,chuThich) values (?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, phong.maPhongChieu);
+            preparedStatement.setString(2, phong.soGhe);
+            preparedStatement.setString(3, phong.mayChieu);
+            preparedStatement.setString(4, phong.amThanh);
+            preparedStatement.setString(5, phong.dienTich);
+            preparedStatement.setString(6, phong.chuThich);
+
+//            preparedStatement.execute();
+            eu = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            eu = -1;
+        } finally {
+            try {
+                preparedStatement.close();
+                conn.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private void btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteActionPerformed
         // TODO add your handling code here:
-        
-         int selectedRowIndex = tblPhong.getSelectedRow();
-         String id = (tableModel.getValueAt(selectedRowIndex, 0).toString());
-         int ret = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa phòng chiếu này?", "Confirm", JOptionPane.YES_NO_OPTION);
-         if(ret != JOptionPane.YES_OPTION) {
-             return;
-   }
-         try {
-             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
-             String sql = "delete from phongchieu where maPhongChieu= '" + id+"'";
-             preparedStatement = conn.prepareStatement(sql);
-             preparedStatement.execute();
-             ret = preparedStatement.executeUpdate();
-             if (ret != -1) {
-                 JOptionPane.showMessageDialog(this, "Phòng chiếu này đã được xóa");  
-             }
-         } catch (SQLException ex) {
-             ex.printStackTrace();
-         } finally {
-             try {
-                 preparedStatement.close();
-                 conn.close();
- 
-             } catch (Exception e) {
-                 e.printStackTrace();
-             }
-         }
 
-           
-    }//GEN-LAST:event_btn_DeleteActionPerformed
-
-    private void tblPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongMouseClicked
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_tblPhongMouseClicked
-
-    private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
-        
-        loadData();
-        showData();
-    }//GEN-LAST:event_btn_RefreshActionPerformed
-
-    void Save(String old_id, Phong updatedphong) {
-         try {
+        int selectedRowIndex = tblPhong.getSelectedRow();
+        String id = (tableModel.getValueAt(selectedRowIndex, 0).toString());
+        int ret = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa phòng chiếu này?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (ret != JOptionPane.YES_OPTION) {
+            return;
+        }
+        try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
-            String sql = "update phongchieu set maPhongChieu= '"+updatedphong.maPhongChieu+"',"
-                                         + " soGhe= '"+updatedphong.soGhe+"', "
-                                         + " mayChieu= '"+updatedphong.mayChieu+"',"
-                                         + " amThanh='"+updatedphong.amThanh+"', "
-                                         + " dienTich='"+updatedphong.dienTich+"',"
-                                         + " chuThich='"+updatedphong.chuThich+"' where maPhongChieu= '"+old_id+"'";                                         
+            String sql = "delete from phongchieu where maPhongChieu= '" + id + "'";
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.execute();
-            
+            ret = preparedStatement.executeUpdate();
+            if (ret != -1) {
+                JOptionPane.showMessageDialog(this, "Phòng chiếu này đã được xóa");
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -606,7 +580,41 @@ public class formPhong extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-        
+        loadData();
+        showData();
+
+    }//GEN-LAST:event_btn_DeleteActionPerformed
+
+    private void tblPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongMouseClicked
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_tblPhongMouseClicked
+
+    void Save(String old_id, Phong updatedphong) {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
+            String sql = "update phongchieu set maPhongChieu= '" + updatedphong.maPhongChieu + "',"
+                    + " soGhe= '" + updatedphong.soGhe + "', "
+                    + " mayChieu= '" + updatedphong.mayChieu + "',"
+                    + " amThanh='" + updatedphong.amThanh + "', "
+                    + " dienTich='" + updatedphong.dienTich + "',"
+                    + " chuThich='" + updatedphong.chuThich + "' where maPhongChieu= '" + old_id + "'";
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.execute();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                conn.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
         // TODO add your handling code here:
@@ -618,66 +626,39 @@ public class formPhong extends javax.swing.JFrame {
         updatedphong.dienTich = txt_dienTich1.getText().toString();
         updatedphong.chuThich = txt_chuThich1.getText().toString();
         Save(old_id, updatedphong);
-        
-        JOptionPane optionPane = new JOptionPane("Sửa phòng chiếu thành công!",JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = optionPane.createDialog("SUCCESS!");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
-        
-         tab_all.remove(tabUpdate);
-        
+
+//        JOptionPane optionPane = new JOptionPane("Sửa phòng chiếu thành công!",JOptionPane.INFORMATION_MESSAGE);
+//        JDialog dialog = optionPane.createDialog("SUCCESS!");
+//        dialog.setAlwaysOnTop(true);
+//        dialog.setVisible(true);
+        JOptionPane.showMessageDialog(this, "Sửa phòng chiếu thành công!", "SUCCESS ", JOptionPane.INFORMATION_MESSAGE);
+
+        tab_all.remove(tabUpdate);
+        loadData();
+        showData();
+
     }//GEN-LAST:event_btn_SaveActionPerformed
     String old_id;
     private void btn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditActionPerformed
         // TODO add your handling code here:
         tabUpdate.setName("Sửa thông tin phòng");
         tab_all.add(tabUpdate);
-        
+        tab_all.setSelectedComponent(tabUpdate);
+
         int selectedRowIndex = tblPhong.getSelectedRow();
-        old_id = tableModel.getValueAt(selectedRowIndex,0).toString();  
-        txt_maPhongChieu1.setText(tableModel.getValueAt(selectedRowIndex,0).toString());
-        txt_soGhe1.setText(tableModel.getValueAt(selectedRowIndex,1).toString());
-        txt_mayChieu1.setText(tableModel.getValueAt(selectedRowIndex,2).toString());
-        txt_amThanh1.setText(tableModel.getValueAt(selectedRowIndex,3).toString());
-        txt_dienTich1.setText(tableModel.getValueAt(selectedRowIndex,4).toString());
-        txt_chuThich1.setText(tableModel.getValueAt(selectedRowIndex,5).toString());
+        old_id = tableModel.getValueAt(selectedRowIndex, 0).toString();
+        txt_maPhongChieu1.setText(tableModel.getValueAt(selectedRowIndex, 0).toString());
+        txt_soGhe1.setText(tableModel.getValueAt(selectedRowIndex, 1).toString());
+        txt_mayChieu1.setText(tableModel.getValueAt(selectedRowIndex, 2).toString());
+        txt_amThanh1.setText(tableModel.getValueAt(selectedRowIndex, 3).toString());
+        txt_dienTich1.setText(tableModel.getValueAt(selectedRowIndex, 4).toString());
+        txt_chuThich1.setText(tableModel.getValueAt(selectedRowIndex, 5).toString());
     }//GEN-LAST:event_btn_EditActionPerformed
 
     private void btn_CancelUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelUpdateActionPerformed
         // TODO add your handling code here:
-         tab_all.remove(tabUpdate);
+        tab_all.remove(tabUpdate);
     }//GEN-LAST:event_btn_CancelUpdateActionPerformed
-
-    int eu; 
-    private void insertIntoDatabase(Phong phong) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-       
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
-            String sql = "insert into phongchieu(maPhongChieu, soGhe, mayChieu,amThanh,dienTich,chuThich) values (?,?,?,?,?,?)";
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, phong.maPhongChieu);
-            preparedStatement.setString(2, phong.soGhe);
-            preparedStatement.setString(3, phong.mayChieu);
-            preparedStatement.setString(4, phong.amThanh);
-            preparedStatement.setString(5, phong.dienTich);
-            preparedStatement.setString(6, phong.chuThich);
-
-//            preparedStatement.execute();
-            eu = preparedStatement.executeUpdate(); 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                preparedStatement.close();
-                conn.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -720,7 +701,6 @@ public class formPhong extends javax.swing.JFrame {
     private javax.swing.JButton btn_Create;
     private javax.swing.JButton btn_Delete;
     private javax.swing.JButton btn_Edit;
-    private javax.swing.JButton btn_Refresh;
     private javax.swing.JButton btn_Save;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
