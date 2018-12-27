@@ -540,7 +540,6 @@ public class formPhim extends javax.swing.JFrame {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
             String sql = "delete from phim where phimID= '" + id + "'";
             ps = conn.prepareStatement(sql);
-            ps.execute();
             ret = ps.executeUpdate();
             if (ret != -1) {
                 JOptionPane.showMessageDialog(this, "Phòng chiếu này đã được xóa");
