@@ -22,12 +22,11 @@ public class formDangKy extends javax.swing.JFrame {
 
     Connection conn = null;
     PreparedStatement ps = null;
-    
+
     public formDangKy() {
         initComponents();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,22 +150,22 @@ public class formDangKy extends javax.swing.JFrame {
         this.setVisible(false);
         this.parent.setVisible(true);
     }//GEN-LAST:event_btn_huyTaoActionPerformed
-   
+
     formDangNhap parent;
     int eu;
     private void btn_taoNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taoNguoiDungActionPerformed
         soSanhMatKhau();
         String tenDangNhap = txt_taoTenDangNhap.getText().toString();
         String nhapLaiMatKhau = txt_nhapLaiMatKhau.getText().toString();
-      
+
         nhapLaiMatKhau = MD5(nhapLaiMatKhau);
         nhapLaiMatKhau = nhapLaiMatKhau + "chucanh";
         nhapLaiMatKhau = MD5(nhapLaiMatKhau);
-        
-        if(soSanhMatKhau()) {
+
+        if (soSanhMatKhau()) {
             try {
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2", "root", "");
-                String sql = "insert into dangnhap(tenDangNhap, matKhau) values ('"+tenDangNhap+"', '"+nhapLaiMatKhau+"')";
+                String sql = "insert into dangnhap(tenDangNhap, matKhau) values ('" + tenDangNhap + "', '" + nhapLaiMatKhau + "')";
                 ps = conn.prepareStatement(sql);
                 eu = ps.executeUpdate();
             } catch (SQLException ex) {
@@ -174,31 +173,34 @@ public class formDangKy extends javax.swing.JFrame {
                 eu = -1;
             }
         }
-        
-        if(eu <= 0) {
-            JOptionPane.showMessageDialog(this, "Đăng ký thất bại !", "THẤT BẠI ", JOptionPane.ERROR_MESSAGE);
-        }
-        else {
+
+        if (eu <= 0) {
+            JOptionPane.showMessageDialog(this, "Đăng ký thất bại !\nMật khẩu không khớp", "THẤT BẠI ", JOptionPane.ERROR_MESSAGE);
+        } else {
             JOptionPane.showMessageDialog(this, "Đăng ký thành công !", "THÀNH CÔNG ", JOptionPane.INFORMATION_MESSAGE);
+            if (this.parent != null) {
+                this.parent.setVisible(true);
+                this.setVisible(false);
+
+            }
         }
     }//GEN-LAST:event_btn_taoNguoiDungActionPerformed
-    
+
     private boolean soSanhMatKhau() {
         boolean ketqua = false;
         String matKhau = txt_taoMatKhau.getText().toString();
         String nhapLaiMatKhau = txt_nhapLaiMatKhau.getText().toString();
-        
+
         matKhau = MD5(matKhau);
-        matKhau =matKhau+ "chucanh";
+        matKhau = matKhau + "chucanh";
         matKhau = MD5(matKhau);
-        
+
         nhapLaiMatKhau = MD5(nhapLaiMatKhau);
-        nhapLaiMatKhau = nhapLaiMatKhau +"chucanh";
+        nhapLaiMatKhau = nhapLaiMatKhau + "chucanh";
         nhapLaiMatKhau = MD5(nhapLaiMatKhau);
-        if(nhapLaiMatKhau.equals(matKhau)) {
+        if (nhapLaiMatKhau.equals(matKhau)) {
             ketqua = true;
-        }
-        else {
+        } else {
             ketqua = false;
         }
         return ketqua;

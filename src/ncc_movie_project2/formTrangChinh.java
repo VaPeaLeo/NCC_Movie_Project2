@@ -5,6 +5,9 @@
  */
 package ncc_movie_project2;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -160,9 +163,8 @@ public class formTrangChinh extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLichChieu)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnPhim)
-                        .addComponent(btnPhong)))
+                    .addComponent(btnPhong)
+                    .addComponent(btnPhim))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnDatVe)
@@ -223,7 +225,14 @@ public class formTrangChinh extends javax.swing.JFrame {
             case "phim" : f = new formPhim(); break;
             case "phong" : f = new formPhong(); break;
             case "lichChieu" : f = new formLichChieu();break;
-            case "datVe" : f = new formDatVe();break;
+            case "datVe" : {
+            try {
+                f = new formDatve();
+            } catch (SQLException ex) {
+                Logger.getLogger(formTrangChinh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+break;
             case "thongKe" : f = new formThongKe(); break;
         }
         if (f != null) {

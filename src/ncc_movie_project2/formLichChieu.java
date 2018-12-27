@@ -34,6 +34,8 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -72,7 +74,8 @@ public class formLichChieu extends javax.swing.JFrame {
                 updatejPanelNoiDungXemNgay();
             }
         });
-
+        
+        
         ButtonGroup group1 = new ButtonGroup();
         group1.add(jRadioButton1);
         group1.add(jRadioButton2);
@@ -80,8 +83,29 @@ public class formLichChieu extends javax.swing.JFrame {
         ButtonGroup group2 = new ButtonGroup();
         group2.add(jRadioButton3);
         group2.add(jRadioButton4);
+        
+        datePicker2.addDateChangeListener(new DateChangeListener() {
+            @Override
+            public void dateChanged(DateChangeEvent dce) {
+            jRadioButton1.setSelected(true);
+            }
+        });
+        datePicker3.addDateChangeListener(new DateChangeListener() {
+            @Override
+            public void dateChanged(DateChangeEvent dce) {
+            jRadioButton3.setSelected(true);
+            }
+        });
+
+        
 
         setupTabThemSua(jComboBox1, dateTimePicker1, jComboBox2);
+        
+        
+        datePicker2.setDateToToday();
+        jRadioButton1.setSelected(true);
+        updatejPanel4();
+        
 
     }
 
@@ -180,15 +204,6 @@ public class formLichChieu extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
-        jPanelNoiDungXemNgay = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        btn_sua_1 = new javax.swing.JButton();
-        btn_xoa_1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
@@ -205,6 +220,15 @@ public class formLichChieu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btn_xoa_2 = new javax.swing.JButton();
         btn_sua_2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        jPanelNoiDungXemNgay = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        btn_sua_1 = new javax.swing.JButton();
+        btn_xoa_1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -236,121 +260,10 @@ public class formLichChieu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setText("Chọn ngày để xem: ");
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
-
-        datePicker1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        datePicker1.setForeground(new java.awt.Color(0, 0, 204));
-
-        jPanelNoiDungXemNgay.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Phim", "Phòng chiếu", "Giờ chiếu"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setRowHeight(30);
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanelNoiDungXemNgayLayout = new javax.swing.GroupLayout(jPanelNoiDungXemNgay);
-        jPanelNoiDungXemNgay.setLayout(jPanelNoiDungXemNgayLayout);
-        jPanelNoiDungXemNgayLayout.setHorizontalGroup(
-            jPanelNoiDungXemNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
-        );
-        jPanelNoiDungXemNgayLayout.setVerticalGroup(
-            jPanelNoiDungXemNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNoiDungXemNgayLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
-        );
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 255));
-
-        btn_sua_1.setBackground(new java.awt.Color(0, 0, 255));
-        btn_sua_1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btn_sua_1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sua_1.setText("Sửa");
-        btn_sua_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sua_1ActionPerformed(evt);
-            }
-        });
-
-        btn_xoa_1.setBackground(new java.awt.Color(255, 0, 51));
-        btn_xoa_1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btn_xoa_1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_xoa_1.setText("Xóa");
-        btn_xoa_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xoa_1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelNoiDungXemNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_sua_1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(btn_xoa_1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelNoiDungXemNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_xoa_1)
-                    .addComponent(btn_sua_1))
-                .addGap(19, 19, 19))
-        );
-
-        jTabbedPane2.addTab("Xem theo ngày", jPanel3);
-
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Bắt đầu từ: ");
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 255));
 
         datePicker2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -368,7 +281,7 @@ public class formLichChieu extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 51, 255));
 
         jLabel5.setText("đến  ");
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 255));
 
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -383,7 +296,7 @@ public class formLichChieu extends javax.swing.JFrame {
         datePicker3.setForeground(new java.awt.Color(0, 0, 204));
 
         jLabel6.setText("  ");
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 255));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
@@ -454,15 +367,15 @@ public class formLichChieu extends javax.swing.JFrame {
                         .addComponent(jRadioButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(8, 8, 8)
                         .addComponent(jRadioButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(datePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3)
@@ -488,16 +401,16 @@ public class formLichChieu extends javax.swing.JFrame {
                         .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jRadioButton2)
                         .addComponent(jLabel5))
-                    .addComponent(jRadioButton1)
                     .addComponent(jLabel3)
-                    .addComponent(jRadioButton3)
                     .addComponent(jButton1)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(datePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButton4)))
-                .addGap(0, 0, 0)
+                        .addComponent(jRadioButton4))
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton3))
+                .addGap(6, 6, 6)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -511,10 +424,122 @@ public class formLichChieu extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(8, 8, 8)
                     .addComponent(jLabel4)
-                    .addContainerGap(560, Short.MAX_VALUE)))
+                    .addContainerGap(572, Short.MAX_VALUE)))
         );
 
-        jTabbedPane2.addTab("Xem theo quãng thời gian", jPanel4);
+        jTabbedPane2.addTab("           Xem theo quãng thời gian           ", jPanel4);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setText("Chọn ngày để xem: ");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
+
+        datePicker1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        datePicker1.setForeground(new java.awt.Color(0, 0, 204));
+
+        jPanelNoiDungXemNgay.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Phim", "Phòng chiếu", "Giờ chiếu"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.setRowHeight(30);
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanelNoiDungXemNgayLayout = new javax.swing.GroupLayout(jPanelNoiDungXemNgay);
+        jPanelNoiDungXemNgay.setLayout(jPanelNoiDungXemNgayLayout);
+        jPanelNoiDungXemNgayLayout.setHorizontalGroup(
+            jPanelNoiDungXemNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
+        );
+        jPanelNoiDungXemNgayLayout.setVerticalGroup(
+            jPanelNoiDungXemNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNoiDungXemNgayLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
+        );
+
+        jLabel2.setText("       ");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 51, 255));
+
+        btn_sua_1.setText("Sửa");
+        btn_sua_1.setBackground(new java.awt.Color(0, 0, 255));
+        btn_sua_1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_sua_1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sua_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sua_1ActionPerformed(evt);
+            }
+        });
+
+        btn_xoa_1.setText("Xóa");
+        btn_xoa_1.setBackground(new java.awt.Color(255, 0, 51));
+        btn_xoa_1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_xoa_1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoa_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoa_1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelNoiDungXemNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_sua_1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(btn_xoa_1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelNoiDungXemNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_xoa_1)
+                    .addComponent(btn_sua_1))
+                .addGap(19, 19, 19))
+        );
+
+        jTabbedPane2.addTab("           Xem theo ngày           ", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -529,7 +554,7 @@ public class formLichChieu extends javax.swing.JFrame {
                 .addComponent(jTabbedPane2))
         );
 
-        jTabbedPane1.addTab("Xem lịch chiếu", jPanel1);
+        jTabbedPane1.addTab("           Xem lịch chiếu           ", jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -617,32 +642,32 @@ public class formLichChieu extends javax.swing.JFrame {
                 .addContainerGap(184, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Thêm lịch chiếu mới", jPanel2);
+        jTabbedPane1.addTab("           Thêm lịch chiếu mới           ", jPanel2);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel13.setText("Chọn phim:");
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel13.setText("Chọn phim:");
 
+        jLabel14.setText("Ngày, Giờ chiếu:");
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel14.setText("Ngày, Giờ chiếu:");
 
+        jLabel15.setText("Phòng chiếu:");
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel15.setText("Phòng chiếu:");
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
 
-        jComboBox4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
 
+        jButton3.setText("Lưu");
         jButton3.setBackground(new java.awt.Color(0, 51, 255));
         jButton3.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Lưu");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -655,9 +680,9 @@ public class formLichChieu extends javax.swing.JFrame {
 
         jLabel18.setText("<html>Để tùy chỉnh giờ, chọn giờ gần nhất rồi chỉnh sửa trực tiếp trên ô nhập liệu<br>Bấm enter để xác nhận</html>");
 
+        jButton4.setText("Hủy");
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
-        jButton4.setText("Hủy");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -718,7 +743,7 @@ public class formLichChieu extends javax.swing.JFrame {
                 .addContainerGap(184, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Sửa lịch chiếu", jPanel5);
+        jTabbedPane1.addTab("           Sửa lịch chiếu           ", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -827,7 +852,7 @@ public class formLichChieu extends javax.swing.JFrame {
             return;
         }
         int idDcChon = (int) tbl.getModel().getValueAt(hangDcChon[0], 0);
-        jPanel5.setName("Sửa lịch chiếu (" + idDcChon + ")");
+        jPanel5.setName("           Sửa lịch chiếu (" + idDcChon + ")           ");
         jTabbedPane1.add(jPanel5);
         jTabbedPane1.setSelectedComponent(jPanel5);
         setupTabThemSua(jComboBox3, dateTimePicker2, jComboBox4);
@@ -835,7 +860,7 @@ public class formLichChieu extends javax.swing.JFrame {
             nhapDuLieuTabSua(
                     (String) tbl.getModel().getValueAt(hangDcChon[0], 1),
                     (String) tbl.getModel().getValueAt(hangDcChon[0], 2),
-                    (SimpleDateFormat.getDateTimeInstance().parse((String) tbl.getModel().getValueAt(hangDcChon[0], 3))));
+                    ((new SimpleDateFormat("yyyy-MM-dd  HH:mm")).parse((String) tbl.getModel().getValueAt(hangDcChon[0], 3))));
         } catch (ParseException ex) {
             Logger.getLogger(formLichChieu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -866,7 +891,7 @@ public class formLichChieu extends javax.swing.JFrame {
                     updatejPanel4();
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Chưa xóa được các lịch chiếu đã chọn", "Thất bại", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Chưa xóa được các lịch chiếu đã chọn\nLý do: Lịch chiếu đã được dùng để đặt vé", "Thất bại", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException ex) {
             Logger.getLogger(formLichChieu.class.getName()).log(Level.SEVERE, null, ex);

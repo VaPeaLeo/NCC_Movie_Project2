@@ -5,17 +5,42 @@
  */
 package ncc_movie_project2;
 
+import bookingve1.Nam.LichChieu1;
+import bookingve1.Nam.LichChieu;
+import bookingve1.Nam.TenPhim;
+import bookingve1.Nam.TenPhim1;
+import bookingve1.Nam.datve1;
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.plaf.basic.*;
+
 /**
  *
- * @author Dao Viet Anh
+ * @author Nam
  */
-public class formDatVe extends javax.swing.JFrame {
-
+public class formDatve extends javax.swing.JFrame {
+List <datve1> DatveList = new ArrayList<>();
+DefaultTableModel tableModel;
     /**
-     * Creates new form formDatVe
+     * Creates new form formDatve
      */
-    public formDatVe() {
+    
+    public formDatve() throws SQLException {
         initComponents();
+        tableModel = (DefaultTableModel) tblDatveList.getModel();
+        init();
     }
 
     /**
@@ -27,23 +52,263 @@ public class formDatVe extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quản lý đặt vé");
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        j_phim = new javax.swing.JComboBox<bookingve1.Nam.TenPhim>();
+        j_tongtien = new javax.swing.JComboBox<>();
+        btn_save = new javax.swing.JButton();
+        bn_reset = new javax.swing.JButton();
+        j_soghe = new javax.swing.JComboBox<>();
+        j_lichChieu = new javax.swing.JComboBox<LichChieu>();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDatveList = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setText("Phim :");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setText("Lịch chiếu :");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setText("Ghế :");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel5.setText("Giá vé :");
+
+        j_phim.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        j_phim.setAutoscrolls(true);
+        j_phim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j_phimActionPerformed(evt);
+            }
+        });
+
+        j_tongtien.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        j_tongtien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "70.000 VNĐ", "120.000 VNND" }));
+        j_tongtien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j_tongtienActionPerformed(evt);
+            }
+        });
+
+        btn_save.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_save.setText("Đặt");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveActionPerformed(evt);
+            }
+        });
+
+        bn_reset.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        bn_reset.setText("Hủy");
+        bn_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bn_resetActionPerformed(evt);
+            }
+        });
+
+        j_soghe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        j_soghe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A00", "A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "B00", "B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B09", "C00", "C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "D00", "D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08", "D09" }));
+
+        j_lichChieu.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(j_soghe, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(j_phim, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(j_lichChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(j_tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(403, Short.MAX_VALUE)
+                        .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(56, 56, 56)
+                .addComponent(bn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(j_phim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(j_lichChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(j_soghe, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(j_tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(124, 124, 124)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_save)
+                    .addComponent(bn_reset))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Đặt vé", jPanel2);
+
+        tblDatveList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên Phim", "Lịch chiếu", "Số Ghế", "Tổng tiền"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblDatveList);
+        if (tblDatveList.getColumnModel().getColumnCount() > 0) {
+            tblDatveList.getColumnModel().getColumn(0).setResizable(false);
+            tblDatveList.getColumnModel().getColumn(1).setResizable(false);
+            tblDatveList.getColumnModel().getColumn(2).setResizable(false);
+            tblDatveList.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Danh sách vé đã đặt", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        // TODO add your handling code here:
+        
+        String phim = j_phim.getSelectedItem().toString();
+        String lichChieu = j_lichChieu.getSelectedItem().toString();
+        String soGhe = j_soghe.getSelectedItem().toString();
+        String tongtien = j_tongtien.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(this, "Bạn đã lưu thành công.");
+        
+        datve1 datve = new datve1 (lichChieu, phim ,soGhe , tongtien);
+        DatveList.add(datve);
+        tableModel= (DefaultTableModel)tblDatveList.getModel();
+        tableModel.addRow(new String []{lichChieu,phim,soGhe,tongtien});
+        tblDatveList.setModel(tableModel);
+    try {
+        InSertIntoDatabase(datve);
+    } catch (SQLException ex) {
+        Logger.getLogger(formDatve.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        System.out.println( lichChieu + ";" + phim + ";"+ soGhe + ";"  + tongtien );
+    }//GEN-LAST:event_btn_saveActionPerformed
+
+   
+    private void bn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bn_resetActionPerformed
+        // TODO add your handling code here:
+        
+        j_phim.setSelectedIndex(0);
+        j_soghe.setSelectedIndex(0);
+        j_tongtien.setSelectedIndex(0);
+    }//GEN-LAST:event_bn_resetActionPerformed
+
+    private void j_phimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_phimActionPerformed
+        JComboBox comboBox = (JComboBox)evt.getSource();
+        TenPhim item = (TenPhim)comboBox.getSelectedItem();
+        System.out.println( item.getId() + " : " + item.getTenPhim());
+        List<LichChieu> lstLichChieu = null;
+    try {
+        lstLichChieu = LichChieu1.getLichChieuById(item.getId());
+    } catch (SQLException ex) {
+        Logger.getLogger(formDatve.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        j_lichChieu.removeAllItems();
+        for (LichChieu lc : lstLichChieu) {
+            j_lichChieu.addItem(lc);
+        }
+        j_lichChieu.setRenderer( new ItemRendererLichChieu());
+    }//GEN-LAST:event_j_phimActionPerformed
+
+    private void j_tongtienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_tongtienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j_tongtienActionPerformed
+
+     private void InSertIntoDatabase( datve1 datve) throws SQLException{
+     Connection conn = null;
+         PreparedStatement prepareStatement = null;
+         try {
+             conn  = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2","root","");
+             String sql = "insert into datve(lichchieu , phim , soGhe , tongtien ) values (?,?,?,?)";
+             prepareStatement = conn.prepareStatement(sql);
+             prepareStatement.setString(1, datve.getLichChieu());
+             prepareStatement.setString(2,datve.getPhim() );
+             prepareStatement.setString(3, datve.getSoghe());
+             prepareStatement.setString(4, datve.gettongtien());
+             prepareStatement.execute();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }finally{
+             try {
+                 prepareStatement.close();
+                 conn.close();
+             } catch (SQLException ex) {
+             }
+         }
+      
+     }
     /**
      * @param args the command line arguments
      */
@@ -61,24 +326,91 @@ public class formDatVe extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(formDatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formDatve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(formDatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formDatve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(formDatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formDatve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(formDatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formDatve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new formDatVe().setVisible(true);
+                try {
+                    new formDatve().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(formDatve.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bn_reset;
+    private javax.swing.JButton btn_save;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox<LichChieu> j_lichChieu;
+    private javax.swing.JComboBox<bookingve1.Nam.TenPhim> j_phim;
+    private javax.swing.JComboBox<String> j_soghe;
+    private javax.swing.JComboBox<String> j_tongtien;
+    private javax.swing.JTable tblDatveList;
     // End of variables declaration//GEN-END:variables
+
+    private Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void init() throws SQLException {
+        List<TenPhim> lstPhim = TenPhim1.getAll();
+        for (TenPhim phim : lstPhim) {
+            j_phim.addItem(phim);
+        }
+        j_phim.setRenderer( new ItemRendererPhim() );
+    }
+    
+    class ItemRendererPhim extends BasicComboBoxRenderer
+    {
+        public Component getListCellRendererComponent(
+            JList list, Object value, int index,
+            boolean isSelected, boolean cellHasFocus)
+        {
+            super.getListCellRendererComponent(list, value, index,
+                isSelected, cellHasFocus);
+ 
+            if (value != null)
+            {
+                TenPhim item = (TenPhim)value;
+                setText( item.getTenPhim().toUpperCase() );
+            }
+            return this;
+        }
+    }
+    
+    class ItemRendererLichChieu extends BasicComboBoxRenderer
+    {
+        public Component getListCellRendererComponent(
+            JList list, Object value, int index,
+            boolean isSelected, boolean cellHasFocus)
+        {
+            super.getListCellRendererComponent(list, value, index,
+                isSelected, cellHasFocus);
+ 
+            if (value != null)
+            {
+                LichChieu item = (LichChieu)value;
+                setText(item.getRoom() + " - " + item.getGioBatDauChieu());
+            }
+            return this;
+        }
+    }
 }

@@ -16,6 +16,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,7 +195,7 @@ public class Utils {
 //                System.out.println("before check");
                 while (rs.next()) {
 //                    System.out.println("test : " + rs.getString("tenPhim"));
-                    if (result.contains(rs.getString("room"))==false) {
+                    if (result.contains(rs.getString("room")) == false) {
                         result.add(rs.getString("room"));
 
                     }
@@ -285,8 +289,63 @@ public class Utils {
             }
 
         }
-        
-        static boolean themLichChieu(int movieID,String room, Long gioBatDauChieu) throws SQLException {
+
+        static void layThongKe(String sql, ThongKe resultToFill, int limit) throws SQLException {
+            String url = getConnString();
+            Connection conn = null;
+            try {
+                conn = DriverManager.getConnection(url, "root", "");
+
+                System.out.println(sql);
+                Statement stmnt = conn.createStatement();
+                ResultSet rs = stmnt.executeQuery(sql);
+
+                resultToFill.ngayhot = resultToFill.phimhot = "<html>";
+                Map phimMap = new Hashtable<>();
+                Map ngayMap = new Hashtable<>();
+
+                while (rs.next()) {
+                    Float tongtien = rs.getFloat("tongtien");
+                    resultToFill.doanhThu += tongtien;
+                    String phim = rs.getString("tenPhim");
+                    if (!phimMap.containsKey(phim)) {
+                        phimMap.put(phim, tongtien);
+                    } else {
+                        phimMap.put(phim, ((Float) phimMap.get(phim)) + tongtien);
+                    }
+                    String ngay = timeMilliToDateString(rs.getLong("gioBatDauChieu"));
+                     if (!ngayMap.containsKey(ngay)) {
+                        ngayMap.put(ngay, tongtien);
+                    } else {
+                        ngayMap.put(ngay, ((Float) ngayMap.get(ngay)) + tongtien);
+                    }
+
+                }
+                phimMap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                        .limit(limit).forEach((e) -> {
+                            resultToFill.phimhot+=(((String)((Map.Entry) e).getKey())+"<br>");
+                        });
+//                System.out.println(phimMap);
+                ngayMap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                        .limit(limit).forEach((e) -> {
+                            resultToFill.ngayhot+=(((String)((Map.Entry) e).getKey())+"<br>");
+                        });
+//                System.out.println(ngayMap);
+                
+                resultToFill.ngayhot += "</html>";
+                resultToFill.phimhot += "</html>";
+            } catch (SQLException ex) {
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+//                System.out.println("stop");
+            }
+
+        }
+
+        static boolean themLichChieu(int movieID, String room, Long gioBatDauChieu) throws SQLException {
             boolean result = false;
             String url = getConnString();
             Connection conn = null;
@@ -295,14 +354,16 @@ public class Utils {
 
                 String sql
                         = "insert into lichChieu (movieID, room, gioBatDauChieu) values"
-                        + "("+movieID+", '"+room+"',"+gioBatDauChieu+")";
+                        + "(" + movieID + ", '" + room + "'," + gioBatDauChieu + ")";
                 System.out.println(sql);
                 Statement stmnt = conn.createStatement();
                 int rows = stmnt.executeUpdate(sql);
 
 //    System.out.println(rs.toString());
 //                System.out.println("before check");
-                if(rows>0) result = true;
+                if (rows > 0) {
+                    result = true;
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -314,8 +375,8 @@ public class Utils {
             }
 
         }
-        
-        static boolean xoaLichChieu(ArrayList<Integer> idList ) throws SQLException {
+
+        static boolean xoaLichChieu(ArrayList<Integer> idList) throws SQLException {
             boolean result = false;
             String url = getConnString();
             Connection conn = null;
@@ -323,21 +384,23 @@ public class Utils {
                 conn = DriverManager.getConnection(url, "root", "");
 
                 String idListStr = "(";
-                    for (int id : idList) {
-                        idListStr += "'" + id + "',";
-                    }
-                    idListStr += ")";
-                    idListStr = idListStr.replace(",)", ")");
-                    System.out.println("id List  =" + idListStr);
+                for (int id : idList) {
+                    idListStr += "'" + id + "',";
+                }
+                idListStr += ")";
+                idListStr = idListStr.replace(",)", ")");
+                System.out.println("id List  =" + idListStr);
                 String sql
-                        = "delete from lichChieu where id in "+ idListStr;
+                        = "delete from lichChieu where id in " + idListStr;
 //                System.out.println(sql);
                 Statement stmnt = conn.createStatement();
                 int rows = stmnt.executeUpdate(sql);
 
 //    System.out.println(rs.toString());
 //                System.out.println("before check");
-                if(rows>0) result = true;
+                if (rows > 0) {
+                    result = true;
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -349,8 +412,8 @@ public class Utils {
             }
 
         }
-        
-        static boolean updateLichChieu(int id, int phimID, String phong, Long gioChieu ) throws SQLException {
+
+        static boolean updateLichChieu(int id, int phimID, String phong, Long gioChieu) throws SQLException {
             boolean result = false;
             String url = getConnString();
             Connection conn = null;
@@ -359,17 +422,19 @@ public class Utils {
 
                 String sql
                         = "update lichChieu"
-                        + " set movieID = "+phimID
-                        + ", room = '"+phong+"'"
-                        + ", gioBatDauChieu= "+gioChieu
-                        + " where id = "+id;
+                        + " set movieID = " + phimID
+                        + ", room = '" + phong + "'"
+                        + ", gioBatDauChieu= " + gioChieu
+                        + " where id = " + id;
                 System.out.println(sql);
                 Statement stmnt = conn.createStatement();
                 int rows = stmnt.executeUpdate(sql);
 
 //    System.out.println(rs.toString());
 //                System.out.println("before check");
-                if(rows>0) result = true;
+                if (rows > 0) {
+                    result = true;
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -392,11 +457,18 @@ public class Utils {
 
             return date.atStartOfDay().toInstant(ZoneOffset.ofHours(7)).toEpochMilli();
         }
-        
-        static String timeMilliToString(Long time){
+
+        static String timeMilliToString(Long time) {
             String result = "";
-         result=   SimpleDateFormat.getDateTimeInstance().format(new Date(time));
+            result = (new SimpleDateFormat("yyyy-MM-dd  HH:mm")).format(new Date(time));
+            return result;
+        }
+
+        static String timeMilliToDateString(Long time) {
+            String result = "";
+            result = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date(time));
             return result;
         }
     }
+
 }

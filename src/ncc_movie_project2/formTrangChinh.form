@@ -81,10 +81,8 @@
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnLichChieu" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnPhim" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnPhong" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnPhong" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPhim" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
